@@ -528,7 +528,7 @@ export class TypingEngine {
    * Manually end an Endless run to bank the score
    */
   endEndlessRun() {
-    if (this.isEndless && this.status === "PLAYING" && !this.isFinalized) {
+    if (this.isEndless && !this.isFinalized) {
       this.finalizeLevel(this.completedWords > 0);
     }
   }

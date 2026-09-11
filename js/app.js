@@ -445,7 +445,12 @@ class App {
       this.ui.closeLeaveModal();
       this._pausedByLeaveModal = false;
       if (this.engine.isEndless) {
-        this.engine.endEndlessRun();
+        if (this.engine.completedWords > 0) {
+          this.engine.endEndlessRun();
+        } else {
+          this.engine.abort();
+          this.navigateTo("menu");
+        }
       } else {
         this.engine.abort();
         this.navigateTo("levels");
@@ -585,9 +590,12 @@ class App {
     const confirmBtn = document.getElementById("btn-leave-confirm");
 
     if (this.engine.isEndless) {
-      if (modalTitle) modalTitle.textContent = "End Endless Run?";
-      if (modalText) modalText.textContent = "Are you sure you want to finish? Your survival score will be recorded.";
-      if (confirmBtn) confirmBtn.textContent = "Finish Run";
+      const hasWords = this.engine.completedWords > 0;
+      if (modalTitle) modalTitle.textContent = hasWords ? "End Endless Run?" : "Leave Endless Mode?";
+      if (modalText) modalText.textContent = hasWords 
+        ? "Are you sure you want to finish? Your survival score will be recorded." 
+        : "Are you sure you want to exit to the main menu?";
+      if (confirmBtn) confirmBtn.textContent = hasWords ? "Finish Run" : "Leave";
     } else {
       if (modalTitle) modalTitle.textContent = "Leave this level?";
       if (modalText) modalText.textContent = "Your current level progress will not be saved as completed.";
