@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, interactive-widget=resizes-content">
+  <title>Typing Chicken - English Vocabulary Typing Game</title>
+  <meta name="description" content="Fun & fast-paced English vocabulary typing game! Play Classic (30 Levels), Minecraft Edition (20 Levels), or Endless Survival mode.">
+  <link rel="icon" type="image/jpeg" href="assets/typing_chicken.jpg">
+  <link rel="apple-touch-icon" href="assets/typing_chicken.jpg">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0d1117">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Typing Chicken">
+
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Typing Chicken - English Vocabulary Typing Game">
+  <meta property="og:description" content="Fun & fast-paced English vocabulary typing game! Play Classic (30 Levels), Minecraft Edition (20 Levels), or Endless Survival mode.">
+  <meta property="og:image" content="assets/typing_chicken.jpg">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Typing Chicken - English Vocabulary Typing Game">
+  <meta name="twitter:description" content="Master English typing with Classic, Minecraft, and Endless modes!">
+  <meta name="twitter:image" content="assets/typing_chicken.jpg">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Top Persistent Header -->
+    <header class="app-header">
+      <div class="brand" id="nav-brand" role="button" tabindex="0" title="Go to Main Menu">
+        <img src="assets/typing_chicken.jpg" alt="Typing Chicken" class="brand-chicken-img">
+        <span class="brand-title">Typing Chicken</span>
+      </div>
+      <div class="header-stats">
+        <button class="header-mode-indicator" id="header-mode-indicator" title="Current Game Mode (Click to toggle)" aria-label="Toggle Game Mode">
+          <span id="header-mode-icon">🐔</span>
+          <span id="header-mode-text">Classic</span>
+        </button>
+        <div class="star-counter" id="header-star-counter" title="Total Stars Earned">
+          <span class="header-star-icon">
+            <svg class="icon-svg star-icon filled" viewBox="0 0 24 24" width="18" height="18" fill="#fbbf24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </span>
+          <span id="header-stars-val">0</span>
+          <span class="header-stars-max" id="header-stars-max">/ 90</span>
+        </div>
+        <button class="icon-btn" id="btn-theme-toggle" title="Toggle Light / Dark Mode" aria-label="Toggle Light/Dark Theme">
+          <span id="theme-icon">
+            <svg class="icon-svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          </span>
+        </button>
+        <button class="icon-btn" id="btn-sound-toggle" title="Toggle Sound" aria-label="Toggle Sound">
+          <span id="sound-icon">
+            <svg class="icon-svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path><path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
+          </span>
+        </button>
+        <button class="icon-btn" id="btn-header-settings" title="Settings" aria-label="Settings">
+          <svg class="icon-svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- MAIN MENU SCREEN -->
+    <main class="screen active" id="screen-menu">
+      <!-- GAME MODE SELECTOR -->
+      <div class="mode-selector-container">
+        <div class="mode-selector-label">Game Mode</div>
+        <div class="mode-selector-cards" id="mode-selector">
+          <button class="mode-card active" id="mode-card-classic" data-mode="classic">
+            <span class="mode-card-icon">🐔</span>
+            <div class="mode-card-content">
+              <div class="mode-card-title">Typing Chicken</div>
+              <div class="mode-card-desc">30 Levels • General Vocab</div>
+            </div>
+          </button>
+          <button class="mode-card" id="mode-card-minecraft" data-mode="minecraft">
+            <span class="mode-card-icon">⛏️</span>
+            <div class="mode-card-content">
+              <div class="mode-card-title">Minecraft Edition</div>
+              <div class="mode-card-desc">20 Levels • Iconic Items & Mobs</div>
+            </div>
+          </button>
+          <button class="mode-card" id="mode-card-endless" data-mode="endless">
+            <span class="mode-card-icon">♾️</span>
+            <div class="mode-card-content">
+              <div class="mode-card-title">Endless Mode</div>
+              <div class="mode-card-desc">Continuous • Random Vocab Pool</div>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <div class="menu-hero">
+        <div class="menu-logo-card">
+          <img src="assets/typing_chicken.jpg" alt="Typing Chicken" id="menu-main-logo" class="menu-main-logo">
+        </div>
+        <p class="game-tagline" id="menu-tagline">Cluck your way through 30 levels! Type fast, spell sharp.</p>
+      </div>
+
+      <div class="menu-actions">
+        <button class="btn btn-primary" id="btn-menu-start">
+          <svg class="icon-svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+          <span id="btn-menu-start-text">Start Game</span>
+        </button>
+        <button class="btn btn-secondary" id="btn-menu-levels">
+          <svg class="icon-svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          <span>Select Level</span>
+        </button>
+        <button class="btn btn-secondary" id="btn-menu-settings">
+          <svg class="icon-svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          <span>Settings</span>
+        </button>
+      </div>
+
+      <div class="menu-summary-cards">
+        <div class="summary-card">
+          <div class="summary-card-val" id="menu-highest-level">1</div>
+          <div class="summary-card-lbl">Unlocked Level</div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-card-val" id="menu-total-stars">0</div>
+          <div class="summary-card-lbl">Stars Earned</div>
+        </div>
+      </div>
+    </main>
+
+    <!-- LEVEL SELECT SCREEN -->
+    <section class="screen" id="screen-levels" style="display: none;">
+      <div class="screen-header-bar">
+        <div>
+          <h2 class="screen-title">Select Level</h2>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Choose an available level to practice typing</p>
+        </div>
+        <button class="btn btn-secondary" id="btn-levels-back">
+          <svg class="icon-svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          <span>Back to Menu</span>
+        </button>
+      </div>
+
+      <div id="levels-container">
+        <!-- Injected dynamically by js/ui.js -->
+      </div>
+    </section>
+
+    <!-- GAMEPLAY SCREEN -->
+    <section class="screen" id="screen-play" style="display: none;">
+      <!-- Game Top Bar -->
+      <div class="game-top-bar">
+        <div class="game-level-info">
+          <button class="btn-leave" id="btn-game-leave" title="Leave Level">
+            <svg class="icon-svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            <span id="btn-game-leave-text">Leave</span>
+          </button>
+          <button class="btn-pause" id="btn-game-pause" title="Pause Game (Press Enter)">
+            <svg class="icon-svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"></rect><rect x="14" y="4" width="4" height="16" rx="1"></rect></svg>
+            <span>Pause</span>
+            <span class="kbd-chip" style="font-size: 0.65rem;">Enter</span>
+          </button>
+          <span class="game-level-title" id="game-level-label">LEVEL 1</span>
+          <span class="game-diff-badge" id="game-diff-badge">Beginner</span>
+        </div>
+
+        <!-- Timer Center -->
+        <div class="timer-container" id="game-timer-container">
+          <span class="timer-label">TIME</span>
+          <span class="timer-value" id="game-timer-val">60.0s</span>
+          <span class="timer-bonus-badge" id="timer-bonus-badge">+2s</span>
+        </div>
+
+        <!-- Word Progress Counter -->
+        <div class="word-counter-box">
+          <div class="word-counter-lbl" id="game-progress-label">PROGRESS</div>
+          <div class="word-counter-val" id="game-word-counter">1 / 10</div>
+        </div>
+      </div>
+
+      <!-- Central Typing Arena -->
+      <div class="typing-arena" id="typing-arena">
+        <div class="target-word-card" id="target-card">
+          <div class="target-word-display" id="target-word-display">
+            <!-- Rendered letter badges -->
+          </div>
+          <div class="error-indicator" id="error-indicator">
+            <svg class="icon-svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            <span>Incorrect spelling — use Backspace to fix!</span>
+          </div>
+        </div>
+
+        <div class="typing-input-wrapper">
+          <input 
+            type="text" 
+            id="typing-input" 
+            class="typing-input" 
+            placeholder="Type to start timer..." 
+            autocomplete="off" 
+            autocorrect="off" 
+            autocapitalize="off" 
+            spellcheck="false" 
+            inputmode="text"
+            enterkeyhint="go"
+            aria-label="Typing input"
+          >
+          <div class="typing-hint">
+            Timer starts on your first keystroke. Advance happens immediately upon completion!
+          </div>
+          <div class="skip-helper-container">
+            <button class="btn-skip-word" id="btn-skip-word" title="Skip this word (1 time per level)">
+              <svg class="icon-svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="5" x2="19" y2="19"></line></svg>
+              <span class="kbd-chip">Space</span>
+              <span id="skip-word-text">Skip Word (1 Left)</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Game Bottom Metrics Bar -->
+      <div class="game-bottom-bar">
+        <div class="metrics-row">
+          <div class="metric-item">
+            <span class="metric-lbl">Accuracy:</span>
+            <span class="metric-val" id="game-live-accuracy">--</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-lbl">Speed:</span>
+            <span class="metric-val" id="game-live-wpm">0 WPM</span>
+          </div>
+          <div class="metric-item" id="metric-streak-item">
+            <span class="metric-lbl">Streak:</span>
+            <span class="metric-val streak-pill" id="game-live-streak">0x</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-lbl">Words:</span>
+            <span class="metric-val" id="game-words-metric">0 / 10</span>
+          </div>
+        </div>
+        <div class="progress-bar-container" title="Level Completion Progress">
+          <div class="progress-bar-fill" id="game-progress-fill"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESULT SCREEN -->
+    <section class="screen" id="screen-result" style="display: none;">
+      <div class="result-card">
+        <div class="result-status-tag" id="result-status-tag">COMPLETED</div>
+        <h2 class="result-level-title" id="result-level-title">LEVEL 1</h2>
+
+        <div class="result-stars-row" id="result-stars-row">
+          <span class="result-star" id="star-1">
+            <svg class="icon-svg star-big" viewBox="0 0 24 24" width="48" height="48"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          </span>
+          <span class="result-star" id="star-2">
+            <svg class="icon-svg star-big" viewBox="0 0 24 24" width="48" height="48"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          </span>
+          <span class="result-star" id="star-3">
+            <svg class="icon-svg star-big" viewBox="0 0 24 24" width="48" height="48"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          </span>
+        </div>
+
+        <div class="result-stats-grid">
+          <div class="result-stat-card">
+            <div class="result-stat-val" id="result-time-val">34.2s</div>
+            <div class="result-stat-lbl">Time Taken</div>
+          </div>
+          <div class="result-stat-card">
+            <div class="result-stat-val highlight-wpm" id="result-wpm-val">0 WPM</div>
+            <div class="result-stat-lbl">Typing Speed</div>
+          </div>
+          <div class="result-stat-card">
+            <div class="result-stat-val" id="result-accuracy-val">100%</div>
+            <div class="result-stat-lbl">Accuracy (First-Try)</div>
+          </div>
+          <div class="result-stat-card">
+            <div class="result-stat-val highlight-streak" id="result-streak-val">0x</div>
+            <div class="result-stat-lbl">Max Streak</div>
+          </div>
+        </div>
+        <div id="result-words-val" style="display: none;">10 / 10</div>
+
+        <div class="result-hint-box" id="result-hint-box">
+          <!-- Helpful hint explaining star rules if fewer than 3 stars -->
+        </div>
+
+        <div class="result-actions">
+          <button class="btn btn-primary" id="btn-result-next">
+            <span>Next Level</span>
+            <svg class="icon-svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </button>
+          <div class="result-btn-row">
+            <button class="btn btn-secondary" id="btn-result-retry">
+              <svg class="icon-svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+              <span>Retry</span>
+            </button>
+            <button class="btn btn-secondary" id="btn-result-levels">
+              <svg class="icon-svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+              <span>Levels</span>
+            </button>
+          </div>
+          <button class="btn btn-secondary" id="btn-result-menu" style="margin-top: 0.2rem;">
+            <span>Main Menu</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SETTINGS SCREEN -->
+    <section class="screen" id="screen-settings" style="display: none;">
+      <div class="screen-header-bar">
+        <div>
+          <h2 class="screen-title">Settings</h2>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Preferences & game rules</p>
+        </div>
+        <button class="btn btn-secondary" id="btn-settings-back">
+          <svg class="icon-svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          <span>Back</span>
+        </button>
+      </div>
+
+      <div class="settings-card">
+        <div class="setting-item">
+          <div>
+            <div class="setting-label">Theme Appearance</div>
+            <div class="setting-desc">Switch between Dark Theme and Light Theme</div>
+          </div>
+          <button class="btn btn-secondary" id="btn-settings-theme" style="padding: 0.5rem 1rem; font-size: 0.9rem;">
+            <span id="settings-theme-icon">
+              <svg class="icon-svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </span>
+            <span id="settings-theme-text">Dark Mode</span>
+          </button>
+        </div>
+
+        <div class="setting-item">
+          <div>
+            <div class="setting-label">Sound Effects</div>
+            <div class="setting-desc">Play synthesized audio tones for typing, chimes, and star pops</div>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="setting-sound-toggle" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="setting-item">
+          <div>
+            <div class="setting-label">Reset Game Progress</div>
+            <div class="setting-desc">Clear all saved stars and reset highest unlocked level to Level 1</div>
+          </div>
+          <button class="btn btn-danger" id="btn-settings-reset" style="padding: 0.5rem 1rem; font-size: 0.9rem;">
+            Reset Progress
+          </button>
+        </div>
+      </div>
+
+      <div class="settings-card">
+        <div class="star-guide-header">
+          <svg class="icon-svg star-icon filled" viewBox="0 0 24 24" width="20" height="20" fill="#fbbf24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <h3 style="font-size: 1.1rem; font-weight: 800; margin: 0;">Star Rating System</h3>
+        </div>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0.8rem;">
+          To pass a level, complete all target words within 50 seconds. Accuracy determines your star rating:
+        </p>
+        <table class="star-guide-table">
+          <thead>
+            <tr>
+              <th>Rating</th>
+              <th>Requirement</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="star-table-cell">
+                <span class="star-cluster">
+                  <svg class="icon-svg star-icon filled" viewBox="0 0 24 24" width="16" height="16" fill="#fbbf24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </span>
+                <span>1 Star</span>
+              </td>
+              <td>Complete all words before 50s &amp; Accuracy &ge; 60%</td>
+            </tr>
+            <tr>
+              <td class="star-table-cell">
+                <span class="star-cluster">
+                  <svg class="icon-svg star-icon filled" viewBox="0 0 24 24" width="16" height="16" fill="#fbbf24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                  <svg class="icon-svg star-icon filled" viewBox="0 0 24 24" width="16" height="16" fill="#fbbf24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </span>
+                <span>2 Stars</span>
+              </td>
+              <td>Complete all words before 60s &amp; Accuracy &ge; 80%</td>
+            </tr>
+            <tr>
+              <td class="star-table-cell">
+                <span class="star-cluster">
+                  <svg class="icon-svg star-icon filled" viewBox="0 0 24 24" width="16" height="16" fill="#fbbf24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                  <svg class="icon-svg star-icon filled" viewBox="0 0 24 24" width="16" height="16" fill="#fbbf24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                  <svg class="icon-svg star-icon filled" viewBox="0 0 24 24" width="16" height="16" fill="#fbbf24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </span>
+                <span>3 Stars</span>
+              </td>
+              <td>Complete all words &amp; Accuracy &ge; 80% in &le; 48 seconds</td>
+            </tr>
+            <tr>
+              <td class="star-table-cell" style="color: var(--text-dim);">
+                <span>0 Stars</span>
+              </td>
+              <td>Passed with Accuracy &lt; 60%, or time expired</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Pause Modal Overlay -->
+    <div class="pause-overlay" id="modal-pause">
+      <div class="pause-dialog">
+        <div class="pause-icon">
+          <svg class="icon-svg" viewBox="0 0 24 24" width="44" height="44" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"></rect><rect x="14" y="4" width="4" height="16" rx="1"></rect></svg>
+        </div>
+        <div class="pause-title">Game Paused</div>
+        <div class="pause-desc">Timer is frozen. Press <span class="kbd-chip">Enter</span> or click Resume to continue playing.</div>
+        <div class="pause-actions">
+          <button class="btn btn-primary" id="btn-pause-resume">
+            <svg class="icon-svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            <span>Resume Game</span>
+          </button>
+          <button class="btn btn-secondary" id="btn-pause-retry">
+            <svg class="icon-svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+            <span>Restart Level</span>
+          </button>
+          <button class="btn btn-secondary" id="btn-pause-levels">
+            <svg class="icon-svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            <span>Back to Level Select</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Leave Level Confirmation Modal -->
+    <div class="modal-overlay" id="modal-leave">
+      <div class="modal-dialog">
+        <div class="modal-title" id="modal-leave-title">Leave this level?</div>
+        <div class="modal-text" id="modal-leave-text">Your current level progress will not be saved as completed.</div>
+        <div class="modal-actions">
+          <button class="btn btn-secondary" id="btn-leave-cancel">Cancel</button>
+          <button class="btn btn-danger" id="btn-leave-confirm">Leave</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reset Progress Confirmation Modal -->
+    <div class="modal-overlay" id="modal-reset">
+      <div class="modal-dialog">
+        <div class="modal-title">Reset All Progress?</div>
+        <div class="modal-text">Are you sure you want to reset all progress? All unlocked levels (Levels 2-30) and earned stars will be permanently erased.</div>
+        <div class="modal-actions">
+          <button class="btn btn-secondary" id="btn-reset-cancel">Cancel</button>
+          <button class="btn btn-danger" id="btn-reset-confirm">Reset</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Disclaimer -->
+    <footer class="app-footer">
+      <span>Typing Chicken • Educational Typing Game</span>
+      <span class="footer-disclaimer">Minecraft is a trademark of Mojang Synergies AB. This is an unofficial fan-made game.</span>
+    </footer>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
